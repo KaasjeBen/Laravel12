@@ -9,9 +9,9 @@
 
 ## Laravel Opdrachten
 
-Deze repository is voor studenten die aan de slag willen met het leren van Laravel12. De opdrachten zijn gekoppeld aan de lessenserie die
-geschreven is om stap voor stap het framework te leren. De eisen van de opdrachten staan dan ook in het document beschreven, met daarbij
-het commando wat je kan uitvoeren als controle.
+Deze repository is voor studenten die aan de slag willen met het leren van Laravel 12. De opdrachten zijn gekoppeld aan de lessenserie die
+geschreven is om stap voor stap het framework te leren. De lessenserie kan je vinden op de website van Stichting Praktijkleren.
+De eisen van de opdrachten staan dan ook in het document beschreven, met daarbij het commando wat je kan uitvoeren als controle.
 
 🎯 De Opdracht: Project Management Tool
 Voor de opdracht ga je aan de slag met een project management tool. Dit is om bij te houden hoever een project staat, welke taken er zijn en wie de taken moeten uitvoeren. De functionaliteit bestaat uit het volgende:
@@ -19,12 +19,8 @@ Voor de opdracht ga je aan de slag met een project management tool. Dit is om bi
 <li><strong>Projecten</strong>: Studenten kunnen projecten aanmaken en beheren</li>
 <li><strong>Taken</strong>: Bij een project kunnen allerlei taken horen</li>
 <li><strong>Activiteiten</strong>: Een taak heeft een status/activiteit, bijvoorbeeld: Todo, Doing, Testing, Verify, Done</li>
-<li><strong>Labels</strong>: Een taak kan verschillende labels hebben, zoals: frontend, backend, documentation, bug, feature</li>
 <li><strong>Gebruikers</strong>: Taken kunnen worden toegewezen aan verschillende gebruikers</li>
 </ul>
-
-En ja, het ziet er misschien lastig uit, maar de opdrachten zullen steeds een klein stapje zijn. De opdrachten zullen ook heel precies zijn,
-er zijn namelijk automatische testen beschikbaar waar op alle details wordt gelet.
 
 ## De installatie (bijv wampserver)
 Voer de volgende stappen uit om met deze opdrachten aan de slag te gaan.
@@ -142,4 +138,5 @@ Gebruik je een andere omgeving, dan zal je soortgelijke stappen moeten nemen om 
 </ul>
 
 ## Contact
-Wil je ook aan de slag met deze opdrachten en heb je hiervoor de lessenserie met opdracht beschrijvingen nodig. Neem dan contact op met mij via m.koningstein@tcrmbo.nl
+Wil je ook aan de slag met deze opdrachten en heb je hiervoor de lessenserie met opdracht beschrijvingen nodig. 
+Neem dan contact op via <a href="https://www.stichtingpraktijkleren.nl/contact/">https://www.stichtingpraktijkleren.nl/contact/</a>

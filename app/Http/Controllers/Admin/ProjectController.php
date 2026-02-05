@@ -11,6 +11,14 @@ use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:index project')->only(['index', 'show']);
+        $this->middleware('permission:create project')->only(['create', 'store']);
+        $this->middleware('permission:edit project')->only(['edit', 'update']);
+        $this->middleware('permission:delete project')->only(['delete', 'destroy']);
+    }
+
     public function index(): View
     {
         $projects = Project::all();

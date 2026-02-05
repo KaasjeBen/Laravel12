@@ -78,10 +78,12 @@
                         <h1 class="text-2xl font-semibold text-slate-900">Admin layout</h1>
                     </div>
                     <div class="flex items-center gap-4">
+                        @can('create project')
                         <a class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 bg-white text-sm text-slate-900 hover:border-slate-300 hover:text-slate-950 transition" href="{{ route('projects.create') }}">
                             <span class="h-2 w-2 rounded-full bg-indigo-400"></span>
                             Nieuw project
                         </a>
+                        @endcan
                         <div class="hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-slate-100 text-sm text-slate-700">
                             <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
                             Live
@@ -135,6 +137,7 @@
                             <span class="text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">Tailwind</span>
                         </div>
                         <div class="grid gap-3">
+                            @can('create project')
                             <a class="flex items-center justify-between px-4 py-3 rounded-2xl border border-slate-200 hover:border-slate-300 transition" href="{{ route('projects.create') }}">
                                 <div>
                                     <p class="text-sm font-semibold text-slate-900">Nieuw project</p>
@@ -142,6 +145,7 @@
                                 </div>
                                 <span class="h-8 w-8 flex items-center justify-center rounded-full bg-slate-900 text-white">+</span>
                             </a>
+                            @endcan
                             <a class="flex items-center justify-between px-4 py-3 rounded-2xl border border-slate-200 hover:border-slate-300 transition" href="{{ route('tasks.create') }}">
                                 <div>
                                     <p class="text-sm font-semibold text-slate-900">Nieuwe taak</p>

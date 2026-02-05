@@ -11,9 +11,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            ['name' => 'Student User', 'email' => 'student@school.nl', 'password' => 'student', 'role' => 'student'],
-            ['name' => 'Teacher User', 'email' => 'teacher@school.nl', 'password' => 'teacher', 'role' => 'teacher'],
-            ['name' => 'Admin User', 'email' => 'admin@school.nl', 'password' => 'admin', 'role' => 'admin'],
+            ['name' => 'student', 'email' => 'student@school.nl', 'password' => 'student', 'role' => 'student'],
+            ['name' => 'teacher', 'email' => 'teacher@school.nl', 'password' => 'teacher', 'role' => 'teacher'],
+            ['name' => 'admin', 'email' => 'admin@school.nl', 'password' => 'admin', 'role' => 'admin'],
         ];
 
         foreach ($users as $userData) {

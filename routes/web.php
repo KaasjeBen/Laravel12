@@ -16,10 +16,6 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/admin', function () {
-    return view('layouts.layoutadmin');
-})->name('admin.home');
-
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
@@ -28,10 +24,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::resource('projects', ProjectController::class);
-    Route::get('/projects/{project}/delete', [ProjectController::class, 'delete'])
-        ->name('projects.delete');
+Route::middleware(['auth.403', 'role:student|teacher|admin'])->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('layouts.layoutadmin');
+    })->name('admin.home');
+
+    Route::controller(ProjectController::class)
+        ->prefix('projects')
+        ->name('projects.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index')->middleware('permission:index project');
+            Route::get('/create', 'create')->name('create')->middleware('permission:create project');
+            Route::post('/', 'store')->name('store')->middleware('permission:create project');
+            Route::get('/{project}', 'show')->name('show')->middleware('permission:show project');
+            Route::get('/{project}/edit', 'edit')->name('edit')->middleware('permission:edit project');
+            Route::match(['put', 'patch'], '/{project}', 'update')->name('update')->middleware('permission:edit project');
+            Route::get('/{project}/delete', 'delete')->name('delete')->middleware('permission:delete project');
+            Route::delete('/{project}', 'destroy')->name('destroy')->middleware('permission:delete project');
+        });
 
     Route::resource('tasks', TaskController::class);
     Route::get('/tasks/{task}/delete', [TaskController::class, 'delete'])

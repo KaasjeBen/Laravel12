@@ -9,9 +9,16 @@ class ActivitySeeder extends Seeder
 {
     public function run(): void
     {
-        $names = ['Todo', 'Doing', 'Testing', 'Verify', 'Done'];
-        foreach ($names as $name) {
-            Activity::firstOrCreate(['name' => $name]);
+        $records = [
+            ['id' => 1, 'name' => 'Todo'],
+            ['id' => 2, 'name' => 'Doing'],
+            ['id' => 3, 'name' => 'Testing'],
+            ['id' => 4, 'name' => 'Verify'],
+            ['id' => 5, 'name' => 'Done'],
+        ];
+
+        foreach ($records as $record) {
+            Activity::updateOrCreate(['id' => $record['id']], ['name' => $record['name']]);
         }
     }
 }

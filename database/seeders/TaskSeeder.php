@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use App\Models\Label;
 use Illuminate\Database\Seeder;
 
@@ -26,19 +27,23 @@ class TaskSeeder extends Seeder
         }
 
         $user = User::first() ?? User::factory()->create();
-        $activities = Activity::all();
-        $projects = Project::all();
+        $activities = Activity::pluck('id')->all();
+        $projects = Project::pluck('id')->all();
         $labels = Label::all();
 
         Task::factory()
             ->count(10)
-            ->create([
-                'user_id' => $user->id,
-                'project_id' => $projects->random()->id,
-                'activity_id' => $activities->random()->id,
-            ])
+            ->create(function () use ($user, $projects, $activities) {
+                return [
+                    'user_id' => $user->id,
+                    'project_id' => Arr::random($projects),
+                    'activity_id' => Arr::random($activities),
+                ];
+            })
             ->each(function (Task $task) use ($labels) {
-                $task->labels()->sync($labels->random(rand(1, min(3, $labels->count()))));
+                if ($labels->count() > 0) {
+                    $task->labels()->sync($labels->random(rand(1, min(3, $labels->count()))));
+                }
             });
     }
 }

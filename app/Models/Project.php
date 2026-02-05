@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['name', 'description'];
+    protected $guarded = ['id'];
 
     public function tasks(): HasMany
     {

@@ -10,7 +10,7 @@ class Activity extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['name'];
+    protected $guarded = ['id'];
 
     public function tasks(): HasMany
     {

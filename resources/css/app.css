@@ -45,6 +45,183 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
+    :root {
+        --page-bg: radial-gradient(circle at 15% 20%, rgba(167, 139, 250, 0.08), transparent 25%),
+            radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.08), transparent 20%),
+            linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #f8fafc 100%);
+        --ink: #0f172a;
+        --muted: #475569;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --shadow-soft: 0 10px 40px rgba(15, 23, 42, 0.08);
+        --radius: 18px;
+    }
+
+    body {
+        font-family: 'Space Grotesk', 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+        background: var(--page-bg);
+        color: var(--ink);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+        color: #4f46e5;
+        text-decoration: none;
+        transition: color 0.15s ease, opacity 0.15s ease;
+    }
+
+    a:hover {
+        color: #312e81;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--ink);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    p {
+        color: var(--muted);
+        line-height: 1.6;
+    }
+
+    /* Cards */
+    .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-soft);
+        padding: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.2rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        box-shadow: 0 12px 30px rgba(79, 70, 229, 0.25);
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 36px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-muted {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        padding: 0.65rem 1rem;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--ink);
+        font-weight: 600;
+        transition: all 0.15s ease;
+    }
+
+    .btn-muted:hover {
+        border-color: #cbd5e1;
+        box-shadow: var(--shadow-soft);
+    }
+
+    /* Tables */
+    table.data {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+    }
+
+    table.data thead {
+        background: #f8fafc;
+    }
+
+    table.data th,
+    table.data td {
+        padding: 0.9rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+    }
+
+    table.data th {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+        color: #94a3b8;
+    }
+
+    table.data tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Forms */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    textarea,
+    select {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.75rem 0.9rem;
+        background: #fff;
+        color: var(--ink);
+        transition: border-color 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    label {
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 0.35rem;
+        display: inline-block;
+    }
+
+    /* Utility wrappers */
+    .page-shell {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        padding: 2.5rem 0 3rem;
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .section-block {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-soft);
+    }
 }
 
 [data-flux-field]:not(ui-radio, ui-checkbox) {

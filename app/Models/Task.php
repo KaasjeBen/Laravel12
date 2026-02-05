@@ -11,14 +11,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
-        'task',
-        'begindate',
-        'enddate',
-        'user_id',
-        'project_id',
-        'activity_id',
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'begindate' => 'date',

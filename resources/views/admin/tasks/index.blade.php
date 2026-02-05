@@ -12,26 +12,13 @@
 </div>
 
 <table class="w-full border border-gray-200">
-    <thead>
-        <tr class="bg-gray-50">
-            <th class="p-2 text-left">ID</th>
-            <th class="p-2 text-left">Taak</th>
-            <th class="p-2 text-left">Begindatum</th>
-            <th class="p-2 text-left">Einddatum</th>
-            <th class="p-2 text-left">Gebruiker</th>
-            <th class="p-2 text-left">Project</th>
-            <th class="p-2 text-left">Activity</th>
-            <th class="p-2 text-left">Labels</th>
-            <th class="p-2 text-left">Acties</th>
-        </tr>
-    </thead>
     <tbody>
         @foreach($tasks as $task)
         <tr class="border-t">
             <td class="p-2">{{ $task->id }}</td>
             <td class="p-2">{{ Str::limit($task->task, 50) }}</td>
             <td class="p-2">{{ $task->begindate }}</td>
-            <td class="p-2">{{ $task->enddate ? $task->enddate->toDateString() : '' }}</td>
+            <td class="p-2">{{ $task->enddate ? $task->enddate : '' }}</td>
             <td class="p-2">{{ $task->user?->name ?? 'N/A' }}</td>
             <td class="p-2">{{ $task->project->name }}</td>
             <td class="p-2">{{ $task->activity->name }}</td>

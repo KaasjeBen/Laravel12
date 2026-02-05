@@ -9,11 +9,16 @@ use App\Models\User;
 use Illuminate\Support\Arr;
 use App\Models\Label;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TaskSeeder extends Seeder
 {
     public function run(): void
     {
+        if (Task::count() > 0) {
+            return;
+        }
+
         if (Activity::count() === 0) {
             $this->call(ActivitySeeder::class);
         }
@@ -30,6 +35,11 @@ class TaskSeeder extends Seeder
         $activities = Activity::pluck('id')->all();
         $projects = Project::pluck('id')->all();
         $labels = Label::all();
+
+        // Raise auto-increment so new IDs don't collide with regex date matching in tests
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE tasks AUTO_INCREMENT = 100000');
+        }
 
         Task::factory()
             ->count(10)

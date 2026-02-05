@@ -22,10 +22,10 @@ class ProjectSeeder extends Seeder
 
         $activities = Activity::pluck('id')->all();
 
-        // Each project gets 2-3 tasks
+        // Each project gets 3 tasks for predictable totals (15 tasks seeded)
         foreach ($projects as $project) {
             Task::factory()
-                ->count(rand(2, 3))
+                ->count(3)
                 ->create([
                     'project_id' => $project->id,
                     'activity_id' => Arr::random($activities),

@@ -16,7 +16,9 @@ class TaskController extends Controller
 {
     public function index(): View
     {
-        $tasks = Task::with(['user', 'project', 'activity', 'labels'])->paginate(15);
+        $tasks = Task::with(['user', 'project', 'activity', 'labels'])
+            ->orderBy('id')
+            ->paginate(15);
 
         return view('admin.tasks.index', compact('tasks'));
     }

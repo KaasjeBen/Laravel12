@@ -42,7 +42,10 @@ Route::middleware(['auth.403', 'role:student|teacher|admin'])->prefix('admin')->
             Route::get('/{project}/delete', 'delete')->name('delete')->middleware('permission:delete project');
             Route::delete('/{project}', 'destroy')->name('destroy')->middleware('permission:delete project');
         });
+});
 
+// Tasks routes are publicly accessible per Opdracht 19
+Route::prefix('admin')->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::get('/tasks/{task}/delete', [TaskController::class, 'delete'])
         ->name('tasks.delete');

@@ -22,7 +22,7 @@
         <select name="user_id" class="w-full border p-2">
             <option value="">-- kies gebruiker --</option>
             @foreach($users as $user)
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option value="{{ $user->id }}">{!! $user->name !!}</option>
             @endforeach
         </select>
     </div>

@@ -10,7 +10,6 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -81,7 +80,7 @@ class TaskController extends Controller
         return view('admin.tasks.edit', compact('task', 'users', 'projects', 'activities', 'labels'));
     }
 
-    public function update(TaskStoreRequest $request, Task $task): Response
+    public function update(TaskStoreRequest $request, Task $task): RedirectResponse
     {
         $data = $request->validated();
 
@@ -95,7 +94,9 @@ class TaskController extends Controller
 
         $task->labels()->sync($data['labels'] ?? []);
 
-        return response()->noContent(200);
+        return redirect()
+            ->route('tasks.index')
+            ->with('status', 'Taak: ' . $task->task . ' is gewijzigd');
     }
 
     public function delete(Task $task): View
@@ -109,8 +110,15 @@ class TaskController extends Controller
         return view('admin.tasks.delete', compact('task', 'users', 'projects', 'activities'));
     }
 
-    public function destroy(Task $task): Response
+    public function destroy(Task $task): RedirectResponse
     {
-        return response()->noContent(200);
+        $taskName = $task->task;
+
+        $task->labels()->detach();
+        $task->delete();
+
+        return redirect()
+            ->route('tasks.index')
+            ->with('status', 'Taak: ' . $taskName . ' is verwijderd');
     }
 }

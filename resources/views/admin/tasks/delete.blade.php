@@ -12,11 +12,11 @@
     </div>
     <div>
         <label class="block mb-1">Begindatum</label>
-        <input type="date" name="begindate" class="w-full border p-2" value="{{ $task->begindate?->toDateString() }}" disabled>
+        <input type="date" name="begindate" class="w-full border p-2" value="{{ $task->begindate }}" disabled>
     </div>
     <div>
         <label class="block mb-1">Einddatum</label>
-        <input type="date" name="enddate" class="w-full border p-2" value="{{ $task->enddate?->toDateString() }}" disabled>
+        <input type="date" name="enddate" class="w-full border p-2" value="{{ $task->enddate }}" disabled>
     </div>
     <div>
         <label class="block mb-1">Gebruiker</label>

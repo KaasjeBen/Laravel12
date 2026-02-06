@@ -42,13 +42,21 @@ Route::middleware(['auth.403', 'role:student|teacher|admin'])->prefix('admin')->
             Route::get('/{project}/delete', 'delete')->name('delete')->middleware('permission:delete project');
             Route::delete('/{project}', 'destroy')->name('destroy')->middleware('permission:delete project');
         });
-});
 
-// Tasks routes are publicly accessible per Opdracht 19
-Route::prefix('admin')->group(function () {
-    Route::resource('tasks', TaskController::class);
-    Route::get('/tasks/{task}/delete', [TaskController::class, 'delete'])
-        ->name('tasks.delete');
+    // Task routes secured by permissions
+    Route::controller(TaskController::class)
+        ->prefix('tasks')
+        ->name('tasks.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index')->middleware('permission:index task');
+            Route::get('/create', 'create')->name('create')->middleware('permission:create task');
+            Route::post('/', 'store')->name('store')->middleware('permission:create task');
+            Route::get('/{task}', 'show')->name('show')->middleware('permission:show task');
+            Route::get('/{task}/edit', 'edit')->name('edit')->middleware('permission:edit task');
+            Route::match(['put', 'patch'], '/{task}', 'update')->name('update')->middleware('permission:edit task');
+            Route::get('/{task}/delete', 'delete')->name('delete')->middleware('permission:delete task');
+            Route::delete('/{task}', 'destroy')->name('destroy')->middleware('permission:delete task');
+        });
 });
 
 Route::get('/projects', [OpenProjectController::class, 'index'])

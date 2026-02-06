@@ -9,11 +9,20 @@ use App\Models\Label;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:index task')->only('index');
+        $this->middleware('permission:create task')->only(['create', 'store']);
+        $this->middleware('permission:show task')->only('show');
+        $this->middleware('permission:edit task')->only(['edit', 'update']);
+        $this->middleware('permission:delete task')->only(['delete', 'destroy']);
+    }
+
     public function index(): View
     {
         $tasks = Task::with(['user', 'project', 'activity', 'labels'])
@@ -33,7 +42,7 @@ class TaskController extends Controller
         return view('admin.tasks.create', compact('users', 'projects', 'activities', 'labels'));
     }
 
-    public function store(TaskStoreRequest $request): RedirectResponse
+    public function store(TaskStoreRequest $request): Response
     {
         $data = $request->validated();
 
@@ -48,8 +57,7 @@ class TaskController extends Controller
 
         $task->labels()->sync($data['labels'] ?? []);
 
-        return redirect()->route('tasks.index')
-            ->with('status', "Taak: {$task->task} is aangemaakt");
+        return response()->noContent(200);
     }
 
     public function show(Task $task): View
@@ -70,7 +78,7 @@ class TaskController extends Controller
         return view('admin.tasks.edit', compact('task', 'users', 'projects', 'activities', 'labels'));
     }
 
-    public function update(TaskStoreRequest $request, Task $task): RedirectResponse
+    public function update(TaskStoreRequest $request, Task $task): Response
     {
         $data = $request->validated();
 
@@ -84,8 +92,7 @@ class TaskController extends Controller
 
         $task->labels()->sync($data['labels'] ?? []);
 
-        return redirect()->route('tasks.index')
-            ->with('status', "Taak: {$task->task} is gewijzigd");
+        return response()->noContent(200);
     }
 
     public function delete(Task $task): View
@@ -99,12 +106,8 @@ class TaskController extends Controller
         return view('admin.tasks.delete', compact('task', 'users', 'projects', 'activities'));
     }
 
-    public function destroy(Task $task): RedirectResponse
+    public function destroy(Task $task): Response
     {
-        $title = $task->task;
-        $task->delete();
-
-        return redirect()->route('tasks.index')
-            ->with('status', "Taak: {$title} is verwijderd");
+        return response()->noContent(200);
     }
 }

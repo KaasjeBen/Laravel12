@@ -9,6 +9,7 @@ use App\Models\Label;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
@@ -42,7 +43,7 @@ class TaskController extends Controller
         return view('admin.tasks.create', compact('users', 'projects', 'activities', 'labels'));
     }
 
-    public function store(TaskStoreRequest $request): Response
+    public function store(TaskStoreRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -57,7 +58,9 @@ class TaskController extends Controller
 
         $task->labels()->sync($data['labels'] ?? []);
 
-        return response()->noContent(200);
+        return redirect()
+            ->route('tasks.index')
+            ->with('status', 'Taak: ' . $task->task . ' is aangemaakt');
     }
 
     public function show(Task $task): View
